@@ -3,15 +3,16 @@ services:
     name: share-movements-backend
     env: node
     plan: free
-    root: apps/server
+    rootDir: apps/server
     buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: PORT
         value: "3001"
-  - type: web
+
+  - type: static
     name: share-movements-frontend
     plan: free
-    root: apps/web
+    rootDir: apps/web
     buildCommand: npm install --workspace apps/web && npm --workspace apps/web run build
     publishPath: apps/web/dist
