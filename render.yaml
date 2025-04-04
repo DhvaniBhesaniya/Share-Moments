@@ -9,7 +9,7 @@ services:
     envVars:
       - key: PORT
         value: "3001"
-  - type: static-site
+  - type: web
     name: share-movements-frontend
     plan: free
     root: apps/web
