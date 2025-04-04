@@ -15,4 +15,4 @@ services:
     plan: free
     rootDir: apps/web
     buildCommand: npm install --workspace apps/web && npm --workspace apps/web run build
-    publishPath: apps/web/dist
+    staticPublishPath: apps/web/dist
