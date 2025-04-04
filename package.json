@@ -1,0 +1,22 @@
+{
+  "name": "share-movements",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev:web": "npm --workspace apps/web run dev",
+    "dev:server": "npm --workspace apps/server run dev",
+    "dev": "concurrently \"npm run dev:web\" \"npm run dev:server\""
+  },
+  "keywords": [],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "author": "Dhvani Bhesaniya",
+  "license": "ISC",
+  "description": "Share Movements",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
