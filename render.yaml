@@ -10,7 +10,7 @@ services:
       - key: PORT
         value: "3001"
 
-  - type: static
+  - type: web
     name: share-movements-frontend
     plan: free
     rootDir: apps/web
