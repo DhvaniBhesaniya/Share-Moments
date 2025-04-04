@@ -1,8 +1,7 @@
 services:
   - type: web
+    runtime: node
     name: share-movements-backend
-    env: node
-    plan: free
     rootDir: apps/server
     buildCommand: npm install
     startCommand: npm start
@@ -11,8 +10,8 @@ services:
         value: "3001"
 
   - type: web
+    runtime: static
     name: share-movements-frontend
-    plan: free
     rootDir: apps/web
     buildCommand: npm install --workspace apps/web && npm --workspace apps/web run build
     staticPublishPath: apps/web/dist
