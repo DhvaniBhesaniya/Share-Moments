@@ -1,18 +1,39 @@
-import RootLayout from './layouts/RootLayout'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navigation from './components/shared/Navigation';
+import HomePage from './components/home/HomePage';
+import EventsPage from './components/events/EventsPage';
+import useStore from './store/useStore';
 
-function App() {
+// Layout component to wrap all pages
+const Layout = ({ children }) => {
+  const { theme } = useStore();
+  
   return (
-    <RootLayout>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-          Welcome to Share Movements
-        </h1>
-        <p className="mt-6 text-lg leading-8 text-gray-600">
-          Track and manage your investments with ease.
-        </p>
+    <div className={theme}>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <Navigation />
+        <main>{children}</main>
       </div>
-    </RootLayout>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+const App = () => {
+  return (
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/events" element={<EventsPage />} />
+          {/* Add more routes as you create new pages */}
+          {/* <Route path="/about" element={<AboutPage />} /> */}
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          {/* <Route path="/register" element={<RegisterPage />} /> */}
+          {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
+        </Routes>
+      </Layout>
+    </Router>
+  );
+};
+
+export default App;
