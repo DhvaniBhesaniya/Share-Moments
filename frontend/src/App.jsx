@@ -1,12 +1,18 @@
-import Login from "./login/Login";
+import RootLayout from './layouts/RootLayout'
 
 function App() {
   return (
-    <div>
-      <h1>Share Movements</h1>
-      <Login />
-    </div>
-  );
+    <RootLayout>
+      <div className="text-center">
+        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+          Welcome to Share Movements
+        </h1>
+        <p className="mt-6 text-lg leading-8 text-gray-600">
+          Track and manage your investments with ease.
+        </p>
+      </div>
+    </RootLayout>
+  )
 }
 
-export default App;
+export default App
