@@ -1,7 +1,387 @@
+# Share Movements - Project Setup Guide
 
---------------------------
---------------------------
-#Root
+## Project Structure
+```
+Share-Movements/
+├── frontend/     # React frontend application
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── shared/    # Reusable components
+│   │   │   │   ├── Navigation.jsx
+│   │   │   │   ├── Button.jsx
+│   │   │   │   ├── Card.jsx
+│   │   │   │   └── Text.jsx
+│   │   │   │
+│   │   │   ├── home/      # Home page components
+│   │   │   └── events/    # Events page components
+│   │   │
+│   │   ├── store/         # State management
+│   │   └── App.jsx        # Main application component
+│   ├── public/            # Static assets
+│   ├── index.html         # Entry HTML file
+│   ├── package.json       # Dependencies and scripts
+│   ├── tailwind.config.js # Tailwind configuration
+│   └── vite.config.js     # Vite configuration
+└── backend/      # Node.js backend application (coming soon)
+```
+
+## Root Setup
+1. Create project directory:
+```bash
+mkdir Share-Movements
+cd Share-Movements
+```
+
+2. Initialize git:
+```bash
+git init
+```
+
+3. Create .gitignore:
+```bash
+node_modules/
+.env
+.DS_Store
+dist/
+build/
+```
+
+## Frontend Setup
+
+1. Create Vite React project:
+```bash
+mkdir frontend
+cd frontend
+npm create vite@latest . -- --template react
+```
+
+2. Initial project setup:
+```bash
+npm install    # Install base dependencies
+```
+
+3. Install routing and UI framework dependencies:
+```bash
+# Routing
+npm install react-router-dom
+
+# UI Components and Icons
+npm install @headlessui/react @heroicons/react
+npm install prop-types
+npm install framer-motion
+
+# State Management (if needed)
+npm install zustand
+```
+
+4. Install and configure Tailwind CSS:
+```bash
+# Install Tailwind and its peer dependencies
+npm install -D tailwindcss postcss autoprefixer
+
+# Install Tailwind plugins
+npm install -D @tailwindcss/typography
+npm install -D @tailwindcss/forms
+npm install -D @tailwindcss/aspect-ratio
+
+# Install DaisyUI
+npm install -D daisyui
+
+# Generate Tailwind and PostCSS config files
+npx tailwindcss init -p
+```
+
+## Configuration Files
+
+1. Tailwind Configuration (tailwind.config.js):
+```javascript
+/** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        primary: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+          950: '#082f49',
+        },
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.5s ease-out',
+        'slide-down': 'slideDown 0.5s ease-out',
+        'scale-in': 'scaleIn 0.2s ease-out',
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+  ],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          "primary": "#0ea5e9",
+          "secondary": "#7dd3fc",
+          "accent": "#0369a1",
+          "neutral": "#2a323c",
+          "base-100": "#ffffff",
+        },
+        dark: {
+          "primary": "#0ea5e9",
+          "secondary": "#7dd3fc",
+          "accent": "#0369a1",
+          "neutral": "#1f2937",
+          "base-100": "#374151",
+        }
+      }
+    ],
+  },
+}
+```
+
+2. PostCSS Configuration (postcss.config.js):
+```javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+3. Vite Configuration (vite.config.js):
+```javascript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+})
+```
+
+## Created Components
+
+1. Shared Components:
+- Navigation (/src/components/shared/Navigation.jsx)
+  - Main navigation bar with responsive design
+  - Uses @headlessui/react for accessibility
+  - Integrates with react-router-dom
+
+- Button (/src/components/shared/Button.jsx)
+  - Reusable button component
+  - Supports multiple variants: primary, secondary, outline, ghost
+  - Uses Framer Motion for animations
+  - Includes loading state and disabled state
+
+- Card (/src/components/shared/Card.jsx)
+  - Reusable card component
+  - Supports animations with Framer Motion
+  - Configurable padding and hover effects
+  - Dark mode support
+
+- Text (/src/components/shared/Text.jsx)
+  - Typography component
+  - Multiple variants: h1-h4, subtitle, body, small
+  - Consistent text styling across the application
+
+2. Page Components:
+- HomePage (/src/components/home/HomePage.jsx)
+  - Landing page with hero section
+  - Features section
+  - Early access signup form
+
+- EventsPage (/src/components/events/EventsPage.jsx)
+  - Events listing with grid layout
+  - Uses Card component for event display
+  - Responsive design
+
+## Dependencies Breakdown
+
+1. Core Dependencies:
+```json
+{
+  "react": "^18.2.0",
+  "react-dom": "^18.2.0",
+  "react-router-dom": "^6.x",
+  "prop-types": "^15.8.1",
+  "framer-motion": "^10.x",
+  "@headlessui/react": "^1.7.x",
+  "@heroicons/react": "^2.0.x"
+}
+```
+
+2. Development Dependencies:
+```json
+{
+  "tailwindcss": "^3.3.x",
+  "postcss": "^8.4.x",
+  "autoprefixer": "^10.4.x",
+  "@tailwindcss/typography": "^0.5.x",
+  "@tailwindcss/forms": "^0.5.x",
+  "@tailwindcss/aspect-ratio": "^0.4.x",
+  "daisyui": "^3.x",
+  "@vitejs/plugin-react": "^4.0.x"
+}
+```
+
+## Available Scripts
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  }
+}
+```
+
+## Environment Setup
+1. Create .env file in frontend directory:
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+## Running the Application
+```bash
+# Development
+npm run dev
+
+# Production Build
+npm run build
+npm run preview
+```
+
+## Next Steps
+1. Complete authentication system
+2. Set up backend with Node.js and Express
+3. Implement database with MongoDB
+4. Add user dashboard
+5. Implement event creation and management
+6. Add real-time features
+
+## Notes
+- Using Vite for faster development experience
+- Tailwind CSS for utility-first styling
+- Component-based architecture with React
+- Mobile-first responsive design
+- Accessible UI components using Headless UI
+- Dark mode support with Tailwind
+- Animation support with Framer Motion
+- Icon system using Heroicons
+- Form handling with custom components
+
+## Complete NPM Installation History
+
+### 1. Initial Vite React Setup
+```bash
+# Create Vite project
+npm create vite@latest . -- --template react
+
+# Install base dependencies
+npm install
+```
+
+### 2. Routing & UI Framework
+```bash
+# Install React Router
+npm install react-router-dom
+
+# Install UI Components & Icons
+npm install @headlessui/react
+npm install @heroicons/react
+npm install prop-types
+npm install framer-motion
+```
+
+### 3. Styling Dependencies
+```bash
+# Install Tailwind CSS and its peer dependencies
+npm install -D tailwindcss
+npm install -D postcss
+npm install -D autoprefixer
+
+# Install Tailwind plugins
+npm install -D @tailwindcss/typography
+npm install -D @tailwindcss/forms
+npm install -D @tailwindcss/aspect-ratio
+
+# Install DaisyUI
+npm install -D daisyui
+```
+
+### 4. Development Dependencies in package.json
+```json
+{
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
+    "@tailwindcss/typography": "^0.5.x",
+    "@tailwindcss/forms": "^0.5.x",
+    "@tailwindcss/aspect-ratio": "^0.4.x",
+    "daisyui": "^3.x"
+  }
+}
+```
+
+### 5. Production Dependencies in package.json
+```json
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.x",
+    "prop-types": "^15.8.1",
+    "framer-motion": "^10.x",
+    "@headlessui/react": "^1.7.x",
+    "@heroicons/react": "^2.0.x"
+  }
+}
+```
+
+### 6. Commands to Reinstall All Dependencies
+If you need to reinstall everything from scratch:
+```bash
+# Remove existing dependencies
+rm -rf node_modules package-lock.json
+
+# Reinstall all dependencies
+npm install
+
+# Reinstall all dev dependencies
+npm install -D tailwindcss postcss autoprefixer
+npm install -D @tailwindcss/typography @tailwindcss/forms @tailwindcss/aspect-ratio daisyui
+```
 
 
 
