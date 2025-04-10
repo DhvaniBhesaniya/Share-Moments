@@ -4,9 +4,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev:web": "npm --workspace apps/web run dev",
-    "dev:server": "npm --workspace apps/server run dev",
-    "dev": "concurrently \"npm run dev:web\" \"npm run dev:server\""
+    "dev": "NODE_ENV=development nodemon backend/server.js",
+    "dev_w": "nodemon backend/server.js",
+    "start": "NODE_ENV=production node backend/server.js",
+    "build": "npm install --legacy-peer-deps && npm install --legacy-peer-deps --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "workspaces": [

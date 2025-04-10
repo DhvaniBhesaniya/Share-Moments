@@ -1,0 +1,43 @@
+
+--------------------------
+--------------------------
+#Root
+
+
+
+
+
+
+
+
+---------------------
+-----------------------
+# Frontend
+
+dhvanibhesaniya@inventyv:~/personal_work/Share-Movements/frontend$ npm create vite@latest . -- --template react
+
+> npx
+> cva . --template react
+
+│
+◇  Scaffolding project in /home/dhvanibhesaniya/personal_work/Share-Movements/frontend...
+│
+└  Done. Now run:
+
+  npm install
+  npm run dev
+
+dhvanibhesaniya@inventyv:~/personal_work/Share-Movements/frontend$ 
+
+
+
+
+-----------------------------
+-----------------------------
+#Backend
+
+
+
+
+
+
